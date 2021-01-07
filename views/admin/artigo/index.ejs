@@ -7,6 +7,9 @@
             <a href="/admin/artigos/novoArtigo" class="btn btn-dark">Criar novo artigo</a>
         </div>
     <hr>
+
+    <input type="text" id="filtrarArtigo" placeholder="Pesquisar artigo" class="form-control mb-3">
+
     <table class="table table-hover">
         <thead class="bg-dark text-light">
           <tr>
@@ -19,9 +22,9 @@
         </thead>
         <tbody>
           <% artigos.forEach(artigo => { %>
-            <tr>
+            <tr id="artigo">
               <th scope="row"><%= artigo.id %></th>
-              <td><%= artigo.titulo %></td>
+              <td id="titulo"><%= artigo.titulo %></td>
               <td><%= artigo.slug %></td>
               <td><%= artigo.categoria.titulo %></td>
               <td>
@@ -37,6 +40,7 @@
       </table>
 </div>
 <%- include('../../partials/footer.ejs') %>
+<script src="/js/filtrarArtigo.js"></script>
 <script>
   function confirmarDelecao(event, form){
       event.preventDefault();

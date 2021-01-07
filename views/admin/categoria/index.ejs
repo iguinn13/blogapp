@@ -7,6 +7,9 @@
             <a href="/admin/categorias/novaCategoria" class="btn btn-dark">Criar nova categoria</a>
         </div>
     <hr>
+
+    <input type="text" id="filtrarCategoria" placeholder="Pesquisar categoria" class="form-control mb-3">
+
     <table class="table table-hover">
         <thead class="bg-dark text-light">
           <tr>
@@ -18,9 +21,9 @@
         </thead>
         <tbody>
           <% categorias.forEach(categoria => { %>
-          <tr>
+          <tr id="categoria">
             <th scope="row"><%= categoria.id %></th>
-            <td><%= categoria.titulo %></td>
+            <td id="titulo"><%= categoria.titulo %></td>
             <td><%= categoria.slug %></td>
             <td>
               <a href="/admin/categorias/editar/<%= categoria.id %>" class="btn btn-warning">Editar</a>
@@ -35,6 +38,7 @@
       </table>
 </div>
 <%- include('../../partials/footer.ejs') %>
+<script src="/js/filtrarCategoria.js"></script>
 <script>
   function confirmarDelecao(event, form){
       event.preventDefault();
