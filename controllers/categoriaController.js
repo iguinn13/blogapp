@@ -38,4 +38,55 @@ router.post('/cadastrarCategoria', (req, res) => {
     });
 });
 
+router.get('/editar/:id', (req, res) => {
+    let id = req.params.id;
+
+    Categoria.findOne({
+        where:{
+            id
+        }
+    }).then(categoria => {
+        if(categoria != undefined){
+            res.render('admin/categoria/editar', {
+                categoria
+            });
+        } else {
+            res.redirect('/admin/categorias');
+        }
+    }).catch(() => {
+        res.redirect('/admin/categorias');
+    });
+});
+
+router.post('/confirmarEdicao', (req, res) => {
+    let id = req.body.id;
+    let titulo = req.body.titulo;
+
+    Categoria.update({
+        titulo,
+        slug: slugify(titulo)
+    },
+    {
+        where:{
+            id
+        }
+    }).then(() => {
+        res.redirect('/admin/categorias');
+    }).catch(() => {
+        res.redirect('/admin/categorias/editar/' + id);
+    })
+});
+
+router.post('/deletar', (req, res) => {
+    let id = req.body.id;
+
+    Categoria.destroy({
+        where:{
+            id
+        }
+    }).then(() => {
+        res.redirect('/admin/categorias');
+    })
+});
+
 module.exports = router;
