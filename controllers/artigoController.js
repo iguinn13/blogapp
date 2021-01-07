@@ -66,6 +66,7 @@ router.post('/confirmarEdicao', adminAuthentication , (req, res) => {
 
     Artigo.update({
         titulo,
+        slug: slugify(titulo),
         categoriaId: categoria,
         corpo
     },

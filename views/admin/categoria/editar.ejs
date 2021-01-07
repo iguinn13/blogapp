@@ -1,15 +1,19 @@
 <%- include('../../partials/head.ejs') %>
 <%- include('../../partials/admin/navbar.ejs') %>
 <div class="container">
-    <hr>
-        <h1>Editar categoria</h1>
-    <hr>
-    <form action="/admin/categorias/confirmarEdicao" method="POST" class="p-4 bg-dark rounded">
-        <input type="hidden" name="id" value="<%= categoria.id %>">
-        <input type="hidden" name="tituloAntigo" value="<%= categoria.titulo %>">
-        <label for="titulo" class="text-white">Titulo</label>
-        <input type="text" name="titulo" class="form-control" value="<%= categoria.titulo %>" required>
-        <button type="submit" class="btn btn-warning mt-4 form-control">Editar</button>
-    </form>
+    <div class="card mt-3">
+        <div class="card-header bg-warning text-dark">
+            <h1>Editar categoria</h1>
+        </div>
+        <div class="card-body bg-dark">
+            <form action="/admin/categorias/confirmarEdicao" method="POST" class="p-4 bg-dark rounded">
+                <input type="hidden" name="id" value="<%= categoria.id %>">
+                <input type="hidden" name="tituloAntigo" value="<%= categoria.titulo %>">
+                <label for="titulo" class="text-white">Titulo</label>
+                <input type="text" name="titulo" class="form-control" value="<%= categoria.titulo %>" required>
+                <button type="submit" class="btn btn-warning mt-4 form-control">Editar</button>
+            </form>
+        </div>
+    </div>
 </div>
 <%- include('../../partials/footer.ejs') %>

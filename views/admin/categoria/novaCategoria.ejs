@@ -1,13 +1,17 @@
 <%- include('../../partials/head.ejs') %>
 <%- include('../../partials/admin/navbar.ejs') %>
 <div class="container">
-    <hr>
-        <h1>Nova categoria</h1>
-    <hr>
-    <form action="/admin/categorias/cadastrarCategoria" method="POST" class="p-4 bg-dark rounded">
-        <label for="titulo" class="text-white">Titulo</label>
-        <input type="text" name="titulo" class="form-control" required>
-        <button type="submit" class="btn btn-success mt-4 form-control">Criar</button>
-    </form>
+    <div class="card mt-3">
+        <div class="card-header bg-primary text-light">
+            <h1>Nova categoria</h1>
+        </div>
+        <div class="card-body bg-dark">
+            <form action="/admin/categorias/cadastrarCategoria" method="POST" class="p-4">
+                <label for="titulo" class="text-white">Titulo</label>
+                <input type="text" name="titulo" class="form-control" required>
+                <button type="submit" class="btn btn-primary mt-4 form-control">Criar</button>
+            </form>
+        </div>
+    </div>  
 </div>
 <%- include('../../partials/footer.ejs') %>
