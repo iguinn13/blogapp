@@ -5,4 +5,8 @@ router.get('/', (req, res) => {
     res.render('admin/categoria/index');
 });
 
+router.get('/novaCategoria', (req, res) => {
+    res.render('admin/categoria/novaCategoria');
+});
+
 module.exports = router;
