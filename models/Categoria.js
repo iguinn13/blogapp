@@ -12,6 +12,6 @@ const Categoria = conexao.define('categorias', {
     }
 });
 
-Categoria.sync({force: false});
+//Categoria.sync({force: false});
 
 module.exports = Categoria;

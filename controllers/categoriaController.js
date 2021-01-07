@@ -61,20 +61,47 @@ router.get('/editar/:id', (req, res) => {
 router.post('/confirmarEdicao', (req, res) => {
     let id = req.body.id;
     let titulo = req.body.titulo;
+    let tituloAntigo = req.body.tituloAntigo;
 
-    Categoria.update({
-        titulo,
-        slug: slugify(titulo)
-    },
-    {
-        where:{
-            id
-        }
-    }).then(() => {
-        res.redirect('/admin/categorias');
-    }).catch(() => {
-        res.redirect('/admin/categorias/editar/' + id);
-    })
+    if(titulo == tituloAntigo){
+        Categoria.update({
+            titulo,
+            slug: slugify(titulo)
+        },
+        {
+            where:{
+                id
+            }
+        }).then(() => {
+            res.redirect('/admin/categorias');
+        }).catch(() => {
+            res.redirect('/admin/categorias/editar/' + id);
+        })
+    } else if(titulo != tituloAntigo){
+        Categoria.findOne({
+            where:{
+                titulo
+            }
+        }).then(categoria => {
+            if(categoria == undefined){
+                Categoria.update({
+                    titulo,
+                    slug: slugify(titulo)
+                },
+                {
+                    where:{
+                        id
+                    }
+                }).then(() => {
+                    res.redirect('/admin/categorias');
+                });
+            } else {
+                res.redirect('/admin/categorias/editar/' + id);
+            }
+        }).catch(() => {
+            res.redirect('/admin/categorias/editar/' + id);
+        });
+    }
 });
 
 router.post('/deletar', (req, res) => {
