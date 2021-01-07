@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const slugify = require('slugify');
+const adminAuthentication = require('../middlewares/adminAuthentication');
 
 const Categoria = require('../models/Categoria');
 const Artigo = require('../models/Artigo');
 
-router.get('/', (req, res) => {
+router.get('/', adminAuthentication ,(req, res) => {
     Artigo.findAll({
         include: [{ model: Categoria, required: true }]
     }).then(artigos => {
@@ -15,7 +16,7 @@ router.get('/', (req, res) => {
     });
 });
 
-router.get('/novoArtigo', (req, res) => {
+router.get('/novoArtigo', adminAuthentication , (req, res) => {
     Categoria.findAll().then(categorias => {
         res.render('admin/artigo/novoArtigo', {
             categorias
@@ -23,7 +24,7 @@ router.get('/novoArtigo', (req, res) => {
     });
 });
 
-router.post('/cadastrarArtigo', (req, res) => {
+router.post('/cadastrarArtigo', adminAuthentication , (req, res) => {
     let titulo = req.body.titulo;
     let categoriaId = req.body.categoria;
     let corpo = req.body.corpo;
@@ -38,7 +39,7 @@ router.post('/cadastrarArtigo', (req, res) => {
     })
 });
 
-router.get('/editar/:id', (req, res) => {
+router.get('/editar/:id', adminAuthentication , (req, res) => {
     let id = req.params.id;
 
     Artigo.findByPk(id).then(artigo => {
@@ -57,7 +58,7 @@ router.get('/editar/:id', (req, res) => {
     });
 });
 
-router.post('/confirmarEdicao', (req, res) => {
+router.post('/confirmarEdicao', adminAuthentication , (req, res) => {
     let id = req.body.id;
     let titulo = req.body.titulo;
     let categoria = req.body.categoria;
@@ -80,7 +81,7 @@ router.post('/confirmarEdicao', (req, res) => {
     });
 });
 
-router.post('/deletar', (req, res) => {
+router.post('/deletar', adminAuthentication , (req, res) => {
     let id = req.body.id;
 
     Artigo.destroy({
