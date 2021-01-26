@@ -11,4 +11,3 @@ Tecnologias:
 <li>Bcrypt</li>
 </ul>
 
-Disponivel em: http://blogappirbs-com-br.umbler.net/
